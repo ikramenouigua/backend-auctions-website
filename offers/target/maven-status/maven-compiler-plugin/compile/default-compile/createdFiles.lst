@@ -1,0 +1,14 @@
+com\jouharApp\offers\exception\AuctionNotFoundException.class
+com\jouharApp\offers\controller\OffersController.class
+com\jouharApp\offers\DTO\DtoAuction.class
+com\jouharApp\offers\repository\OfferRepo.class
+com\jouharApp\offers\exception\BidNotFoundException.class
+com\jouharApp\offers\model\Offer.class
+com\jouharApp\offers\service\OfferService.class
+com\jouharApp\offers\OffersApplication.class
+com\jouharApp\offers\service\AuctionService.class
+com\jouharApp\offers\service\imp\OfferServiceImp.class
+com\jouharApp\offers\repository\AuctionRepo.class
+com\jouharApp\offers\model\Auction.class
+com\jouharApp\offers\controller\AuctionController.class
+com\jouharApp\offers\service\imp\AuctionServiceImp.class
