@@ -42,6 +42,11 @@ public class registrationController {
         List<AppUser> users = registrationService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+    @GetMapping("/getUser/{id}")
+    public ResponseEntity<Optional<AppUser>> getUser (@PathVariable("id") Long id){
+        Optional<AppUser> user = registrationService.getUser(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @GetMapping(path = "confirm")
     public String confirm(@RequestParam("token") String token) {

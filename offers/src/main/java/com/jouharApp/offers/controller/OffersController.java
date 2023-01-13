@@ -27,9 +27,16 @@ public class OffersController {
 
     @GetMapping("/allOffers")
     public ResponseEntity<List<Offer>> getAllOffers (){
+        offerService.changeState();
         List<Offer> offers = offerService.getOffers();
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
+    @GetMapping("/filterOffers/{surface}/{nbChambre}")
+    public ResponseEntity<List<Offer>> FilterOffers (@PathVariable("surface") Long surface,@PathVariable("nbChambre") int nbChambre){
+        List<Offer> offers = offerService.filterOffers(surface,nbChambre);
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
+
     @GetMapping("/getOffersByUser/{id}")
     public ResponseEntity<List<Offer>> getOffersByUser (@PathVariable("id") Long id){
         List<Offer> offers = offerService.getOffersByUser(id);

@@ -15,6 +15,8 @@ public class DTOOffer {
 
 
     private Date duration;
+    private Long surface;
+    private int nbChambre;
 
     private Long iduser;
     private Double initialprice;

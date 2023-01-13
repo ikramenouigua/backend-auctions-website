@@ -14,6 +14,7 @@ public interface ImageRepository extends JpaRepository<Image, Long>{
     Optional<Image> findById(Long id);
 
 
+
 //    @Query("select c from Image c where c.offer.id like %?1")
 //    Optional<Image> findByOfferId(Long offer_id);
 

@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auctions")
@@ -40,8 +43,39 @@ public class AuctionController {
     }
 
     @GetMapping("/findbyoffer/{id}")
-    public ResponseEntity<Optional<List<Auction>> > findOfferByOfferId (@PathVariable("id") Long id){
-        Optional<List<Auction>> auction = auctionService.getAuctionbyofferid(id);
+    public ResponseEntity<List<Auction> > findOfferByOfferId (@PathVariable("id") Long id){
+        List<Auction> auction = auctionService.getAuctionbyofferid(id);
         return new ResponseEntity<>(auction, HttpStatus.OK);
     }
+    @GetMapping("/findWinner/{id}")
+    public ResponseEntity<Auction> findWinnerOffer (@PathVariable("id") Long id){
+       List<Auction> auctions = auctionService.getAuctionbyofferid(id);
+
+        List<Auction> sortedUsers = auctions.stream()
+                .sorted( Comparator.comparing( Auction::getPrice ).reversed() )
+                .collect( Collectors.toList() );
+        System.out.println(sortedUsers);
+//        Collections.sort(auctions, new Comparator<Auction>() {
+//            @Override
+//            public int compare(Auction o1, Auction o2) {
+//
+//                int x= (int)Math.round (o1.getPrice()-o2.getPrice());
+//                return x;
+//            }
+//
+//
+//        });
+
+//        Collections.sort(auctions, new Comparator<Auction>() {
+//
+//            @Override
+//            public int compare(Auction employee1, Auction employee2) {
+//                return employee1.getPrice().compareTo(employee2.getPrice());
+//            }
+//
+//        });
+        Auction auction = sortedUsers.get(0);
+        return new ResponseEntity<>(auction, HttpStatus.OK);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.jouharApp.offers.model;
 
 
+import com.jouharApp.offers.enumeration.StateOffer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +25,11 @@ public class Offer {
     @Column(name = "iduser")
     private Long iduser;
 
+    @Column(name = "surface")
+    private Long surface;
+
+    @Column(name = "nbchambre")
+    private int nbChambre;
     @Column(name = "address")
     private String address;
 
@@ -38,6 +44,10 @@ public class Offer {
 
     @Column(name = "imagename")
     private String imagename;
+
+    @Column(name = "stateoffer")
+    @Enumerated(EnumType.STRING)
+    private StateOffer stateoffer;
 
     @OneToOne
     @JoinColumn(name="image_id", nullable=false)

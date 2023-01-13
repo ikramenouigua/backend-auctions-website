@@ -9,7 +9,6 @@ import com.jouharApp.offers.service.AuctionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuctionServiceImp implements AuctionService {
@@ -29,7 +28,7 @@ public class AuctionServiceImp implements AuctionService {
     }
 
     @Override
-    public Optional<List<Auction>> getAuctionbyofferid(Long id) {
+    public List<Auction> getAuctionbyofferid(Long id) {
         return  auctionRep.findAuctionByOffer_Id(id);
     }
 
