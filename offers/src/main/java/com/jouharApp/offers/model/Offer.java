@@ -5,6 +5,7 @@ import com.jouharApp.offers.enumeration.StateOffer;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -30,6 +31,13 @@ public class Offer {
 
     @Column(name = "nbchambre")
     private int nbChambre;
+
+    @Column(name = "lat")
+    private Double lat;
+
+    @Column(name = "lng")
+    private Double lng;
+
     @Column(name = "address")
     private String address;
 

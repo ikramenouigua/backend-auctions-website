@@ -99,6 +99,8 @@ public class OfferServiceImp implements OfferService {
         offre1.setDebutAuction(  offer.getDebutAuction());
         offre1.setInitialprice( offer.getInitialprice() );
         offre1.setIduser( offer.getIduser() );
+        offre1.setLat( offer.getLat() );
+        offre1.setLng( offer.getLng() );
         System.out.println(offer.getDebutAuction());
         System.out.println(date);
 

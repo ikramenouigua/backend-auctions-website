@@ -24,7 +24,8 @@ public class DTOOffer {
 
     private Date debutAuction;
 
-
+    private  Double lat;
+    private Double lng ;
 
     private String imagename;
 }
