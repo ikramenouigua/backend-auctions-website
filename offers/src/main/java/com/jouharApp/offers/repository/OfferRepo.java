@@ -15,6 +15,8 @@ public interface OfferRepo extends JpaRepository<Offer, Long> {
     void deleteOfferById(Long id);
     List<Offer> findByStateoffer(StateOffer state);
 
+    List<Offer> findByIduserAndStateoffer(Long id,StateOffer state);
+
     List<Offer> findByIduser(Long id);
     List<Offer> findBySurfaceAndNbChambreAndStateoffer(Long surface,int nbChambre,StateOffer state);
 }

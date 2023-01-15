@@ -2,22 +2,35 @@ package com.jouharApp.offers.service.imp;
 
 import com.jouharApp.offers.DTO.DTOOffer;
 import com.jouharApp.offers.enumeration.StateOffer;
+import com.jouharApp.offers.enumeration.StatutAuction;
+import com.jouharApp.offers.model.Auction;
 import com.jouharApp.offers.model.Image;
 import com.jouharApp.offers.model.Offer;
+import com.jouharApp.offers.model.WinnerAuction;
+import com.jouharApp.offers.repository.AuctionRepo;
 import com.jouharApp.offers.repository.ImageRepository;
 import com.jouharApp.offers.repository.OfferRepo;
+import com.jouharApp.offers.repository.WinnerAuctionRepo;
 import com.jouharApp.offers.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferServiceImp implements OfferService {
+    @Autowired
     OfferRepo offerRep ;
+    @Autowired
+    AuctionRepo auctionRep ;
+
+    @Autowired
+    WinnerAuctionRepo WinAuctionRepository;
 
     @Autowired
     ImageRepository imageRepository;
@@ -41,6 +54,19 @@ public class OfferServiceImp implements OfferService {
     public List<Offer> getOffers() {
 
         return offerRep.findByStateoffer(StateOffer.available);
+    }
+
+    public List<Offer> getOffersByUserAvailable(Long id){
+        return offerRep.findByIduserAndStateoffer( id,StateOffer.available );
+    }
+
+    public List<Offer> getOffersByUserFinished(Long id){
+        return offerRep.findByIduserAndStateoffer( id,StateOffer.finished );
+    }
+
+    public List<Offer> getOffersByUserNotStarted(Long id){
+
+        return offerRep.findByIduserAndStateoffer( id,StateOffer.notStarted );
     }
 
     public List<Offer> getOffersByUser(Long id){
@@ -67,9 +93,24 @@ public class OfferServiceImp implements OfferService {
             System.out.println(offres.get(i).getDebutAuction());
             if(offres.get(i).getDebutAuction().after(date)){
 
-                offres.get(i).setStateoffer( StateOffer.not_started );
+                offres.get(i).setStateoffer( StateOffer.notStarted );
             }else if(offres.get(i).getDuration().before(date)){
+
+               if(!(offres.get(i).getStateoffer().equals( StateOffer.finished ))) {
+                   List<Auction> auctions = this.auctionRep.findAuctionByOffer_Id( offres.get( i ).getId() );
+
+                   List<Auction> sortedUsers = auctions.stream()
+                           .sorted( Comparator.comparing( Auction::getPrice ).reversed() )
+                           .collect( Collectors.toList() );
+                   WinnerAuction winAuc = new WinnerAuction();
+                   winAuc.setOffer( offres.get( i ) );
+                   winAuc.setPriceWin( sortedUsers.get( 0 ).getPrice() );
+                   winAuc.setIduser( sortedUsers.get( 0 ).getIduser() );
+                   winAuc.setStatus( StatutAuction.notyet );
+                   this.WinAuctionRepository.save( winAuc );
+               }
                 offres.get(i).setStateoffer( StateOffer.finished );
+
 
             }
             else{
@@ -105,7 +146,7 @@ public class OfferServiceImp implements OfferService {
         System.out.println(date);
 
         if(offer.getDebutAuction().after(date)){
-            offre1.setStateoffer( StateOffer.not_started );
+            offre1.setStateoffer( StateOffer.notStarted );
         }else{
             offre1.setStateoffer( StateOffer.available );
         }

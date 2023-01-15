@@ -31,6 +31,24 @@ public class OffersController {
         List<Offer> offers = offerService.getOffers();
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
+
+    @GetMapping("/getOffersByUseravailable/{id}")
+    public ResponseEntity<List<Offer>> getOffersByUserAvailable (@PathVariable("id") Long id){
+        List<Offer> offers = offerService.getOffersByUserAvailable(id);
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
+
+    @GetMapping("/getOffersByUserfinished/{id}")
+    public ResponseEntity<List<Offer>> getOffersByUserFinished (@PathVariable("id") Long id){
+        List<Offer> offers = offerService.getOffersByUserFinished(id);
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
+
+    @GetMapping("/getOffersByUsernotstarted/{id}")
+    public ResponseEntity<List<Offer>> getOffersByUserNotStarted (@PathVariable("id") Long id){
+        List<Offer> offers = offerService.getOffersByUserNotStarted(id);
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
     @GetMapping("/filterOffers/{surface}/{nbChambre}")
     public ResponseEntity<List<Offer>> FilterOffers (@PathVariable("surface") Long surface,@PathVariable("nbChambre") int nbChambre){
         List<Offer> offers = offerService.filterOffers(surface,nbChambre);

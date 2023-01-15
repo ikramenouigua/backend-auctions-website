@@ -16,6 +16,9 @@ public interface OfferService {
 
     public Offer saveOffer(DTOOffer offer);
     List<Offer> getOffersByUser(Long id);
+    public List<Offer> getOffersByUserAvailable(Long id);
+    public List<Offer> getOffersByUserFinished(Long id);
+    public List<Offer> getOffersByUserNotStarted(Long id);
     public List<Offer> filterOffers(Long surface,int nbChambre);
 
 }
