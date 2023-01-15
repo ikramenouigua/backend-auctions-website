@@ -32,7 +32,7 @@ public class WinnerAuctionController {
     }
     @GetMapping("/sellerwinauction/{id}")
     public ResponseEntity<List<WinnerAuction>> WinnerAuctionByseller (@PathVariable("id") Long id){
-        List<WinnerAuction> WinnerAuctions = winnerAucService.getWinnerAuctionBuuser( id );
+        List<WinnerAuction> WinnerAuctions = winnerAucService.getWinnerAuctiionbyseller( id );
         return new ResponseEntity<>(WinnerAuctions, HttpStatus.OK);
     }
 

@@ -107,6 +107,7 @@ public class OfferServiceImp implements OfferService {
                    winAuc.setPriceWin( sortedUsers.get( 0 ).getPrice() );
                    winAuc.setIduser( sortedUsers.get( 0 ).getIduser() );
                    winAuc.setStatus( StatutAuction.notyet );
+                   winAuc.setIdseller( sortedUsers.get( 0 ).getOffer().getIduser() );
                    this.WinAuctionRepository.save( winAuc );
                }
                 offres.get(i).setStateoffer( StateOffer.finished );

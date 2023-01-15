@@ -27,8 +27,8 @@ public class WinnerAucService {
     public List<WinnerAuction> getWinnerAuctionBuuser(Long id) {
         return winAuctionRepository.findWinnerAuctionByIduser( id ) ;
     }
-    public List<WinnerAuction> getWinnerAuctionBuuser(Long id) {
-        return winAuctionRepository.findWinnerAuctionByOffer_Id(id) ;
+    public List<WinnerAuction> getWinnerAuctiionbyseller(Long id) {
+        return winAuctionRepository.findWinnerAuctionByIdsellerAndStatus(id,StatutAuction.accepter) ;
     }
     public void accepterOffre(Long id){
         System.out.println(id);
@@ -50,6 +50,7 @@ public class WinnerAucService {
         winAuc.setOffer(au1.getOffer());
         winAuc.setPriceWin( sortedUsers.get( 1 ).getPrice() );
         winAuc.setIduser( sortedUsers.get( 1 ).getIduser() );
+        winAuc.setIduser( sortedUsers.get( 1 ).getOffer().getIduser() );
         winAuc.setStatus( StatutAuction.notyet );
         this.winAuctionRepository.save( winAuc );
         winAuctionRepository.save( au1 );

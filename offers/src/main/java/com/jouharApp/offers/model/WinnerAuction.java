@@ -21,6 +21,9 @@ public class WinnerAuction {
     @Column(name = "iduser")
     private Long iduser;
 
+    @Column(name = "idseller")
+    private Long idseller;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatutAuction status;
