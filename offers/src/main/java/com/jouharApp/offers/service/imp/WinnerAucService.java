@@ -1,7 +1,9 @@
 package com.jouharApp.offers.service.imp;
 
+
 import com.jouharApp.offers.enumeration.StatutAuction;
 import com.jouharApp.offers.model.Auction;
+import com.jouharApp.offers.model.Offer;
 import com.jouharApp.offers.model.WinnerAuction;
 import com.jouharApp.offers.repository.AuctionRepo;
 import com.jouharApp.offers.repository.WinnerAuctionRepo;
@@ -36,6 +38,9 @@ public class WinnerAucService {
         System.out.println(au1);
         au1.setStatus( StatutAuction.accepter );
         winAuctionRepository.save( au1 );
+    }
+    public Offer getOffer(Long id){
+        return winAuctionRepository.findWinnerAuctionById( id ).getOffer();
     }
     public void refuserOffre(Long id){
         WinnerAuction au1=winAuctionRepository.findWinnerAuctionById( id );

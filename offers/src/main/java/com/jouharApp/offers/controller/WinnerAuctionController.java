@@ -1,6 +1,9 @@
 package com.jouharApp.offers.controller;
 
+
+
 import com.jouharApp.offers.model.Auction;
+import com.jouharApp.offers.model.Offer;
 import com.jouharApp.offers.model.WinnerAuction;
 import com.jouharApp.offers.service.imp.WinnerAucService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +38,15 @@ public class WinnerAuctionController {
         List<WinnerAuction> WinnerAuctions = winnerAucService.getWinnerAuctiionbyseller( id );
         return new ResponseEntity<>(WinnerAuctions, HttpStatus.OK);
     }
+    @GetMapping("/getoffer/{id}")
+    public ResponseEntity<Offer> getOfferByid (@PathVariable("id") Long id){
+        Offer offer= winnerAucService.getOffer( id );
+        return new ResponseEntity<>(offer, HttpStatus.OK);
+    }
 
     @GetMapping("/accepter/{id}")
     public ResponseEntity<String> accepterOffre (@PathVariable("id") Long id){
-       winnerAucService.accepterOffre( id );
+        winnerAucService.accepterOffre( id );
         return new ResponseEntity<>("good", HttpStatus.OK);
     }
 

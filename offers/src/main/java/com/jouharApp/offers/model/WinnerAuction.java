@@ -1,5 +1,7 @@
 package com.jouharApp.offers.model;
 
+
+
 import com.jouharApp.offers.enumeration.StatutAuction;
 import lombok.Data;
 

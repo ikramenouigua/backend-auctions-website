@@ -4,6 +4,7 @@ com\project\users\UsersApplication.class
 com\project\users\appUser\AppUserService.class
 com\project\users\registration\registrationRequest.class
 com\project\users\appUser\AppUserRepository.class
+com\project\users\registration\loginRequest.class
 com\project\users\appUser\AppUserRole.class
 com\project\users\registration\EmailValidator.class
 com\project\users\appUser\AppUser.class
